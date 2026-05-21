@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
-const url = 'http://localhost:3000';
+const url = 'https://farmtohome-14jo.onrender.com';
 const AuthContext = createContext();
 
 export const useAuth = () => {
