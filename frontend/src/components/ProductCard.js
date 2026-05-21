@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapPinIcon, UserIcon } from '@heroicons/react/24/outline';
-const url = 'http://localhost:3000';
+const url = 'https://farmtohome-14jo.onrender.com';
 
 const ProductCard = ({ product, onAddToCart, showAddToCart = true }) => {
   const productImage = product.image
