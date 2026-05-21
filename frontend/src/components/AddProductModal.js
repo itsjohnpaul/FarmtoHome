@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { XMarkIcon, CameraIcon } from '@heroicons/react/24/outline';
-const url = 'http://localhost:3000';
+const url = 'https://farmtohome-14jo.onrender.com';
 
 const AddProductModal = ({ isOpen, onClose, onSubmit, product, fixedPrices }) => {
   const [formData, setFormData] = useState({
