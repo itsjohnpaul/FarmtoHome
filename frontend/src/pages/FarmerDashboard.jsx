@@ -6,7 +6,7 @@ import ProductCard from '../components/ProductCard';
 import { PlusIcon, PencilIcon, TrashIcon, CheckIcon, XMarkIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
 import axios from 'axios';
 
-const url = 'http://localhost:3000';
+const url = 'https://farmtohome-14jo.onrender.com';
 
 const FarmerDashboard = () => {
   const { user, token } = useAuth();
