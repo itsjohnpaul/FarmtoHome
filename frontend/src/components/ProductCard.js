@@ -1,11 +1,12 @@
 import React from 'react';
 import { MapPinIcon, UserIcon } from '@heroicons/react/24/outline';
+const url = 'http://localhost:3000';
 
 const ProductCard = ({ product, onAddToCart, showAddToCart = true }) => {
   const productImage = product.image
     ? product.image.startsWith('http')
       ? product.image
-      : `http://localhost:3000${product.image}`
+      : `${url}${product.image}`
     : 'https://via.placeholder.com/400x300?text=No+Image';
 
   return (

@@ -5,6 +5,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { TrashIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
 import axios from 'axios';
 
+const url = 'http://localhost:3000';
+
 const Cart = () => {
   const { user, token } = useAuth();
   const { cartItems, updateQuantity, removeFromCart, getTotalPrice, clearCart } = useCart();
@@ -60,7 +62,7 @@ const Cart = () => {
 
       // Place orders for each farmer
       const orderPromises = Object.entries(ordersByFarmer).map(([farmerId, orderData]) =>
-        axios.post('http://localhost:3000/api/orders', {
+        axios.post(`${url}/api/orders`, {
           items: orderData.items,
           totalPrice: orderData.totalPrice,
           farmerId: farmerId,
@@ -165,7 +167,7 @@ const Cart = () => {
                     const cartImage = item.image
                       ? item.image.startsWith('http')
                         ? item.image
-                        : `http://localhost:3000${item.image}`
+                          : `${url}${item.image}`
                       : 'https://via.placeholder.com/100x100?text=No+Image';
                     const itemId = item._id || item.id;
 

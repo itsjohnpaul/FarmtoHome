@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { XMarkIcon, CameraIcon } from '@heroicons/react/24/outline';
+const url = 'http://localhost:3000';
 
 const AddProductModal = ({ isOpen, onClose, onSubmit, product, fixedPrices }) => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const AddProductModal = ({ isOpen, onClose, onSubmit, product, fixedPrices }) =>
       });
       // Set image preview if product has an image
       if (product.image) {
-        setImagePreview(product.image.startsWith('http') ? product.image : `http://localhost:3000${product.image}`);
+        setImagePreview(product.image.startsWith('http') ? product.image : `${url}${product.image}`);
       }
     } else {
       setFormData({

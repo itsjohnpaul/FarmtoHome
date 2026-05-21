@@ -14,6 +14,8 @@ import {
 } from '@heroicons/react/24/outline';
 import axios from 'axios';
 
+const url = 'http://localhost:3000';
+
 const Profile = () => {
   const { user, token, setUser, logout } = useAuth();
   const navigate = useNavigate();
@@ -36,14 +38,14 @@ const Profile = () => {
 
   const loadUserProfile = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/users/profile', {
+      const response = await axios.get(`${url}/api/users/profile`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const userData = response.data.user;
       setUser(userData);
       localStorage.setItem('farm2home_user', JSON.stringify(userData));
       if (userData.profilePhoto) {
-        setPhotoPreview(`http://localhost:3000${userData.profilePhoto}`);
+        setPhotoPreview(`${url}${userData.profilePhoto}`);
       }
     } catch (error) {
       console.error('Error loading profile:', error);
@@ -55,7 +57,7 @@ const Profile = () => {
 
   const loadUserOrders = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/orders/customer/${user._id}`, {
+      const response = await axios.get(`${url}/api/orders/customer/${user._id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       setOrders(response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
@@ -93,7 +95,7 @@ const Profile = () => {
     
     // Clear user's orders from database
     // try {
-    //   await axios.delete('http://localhost:3000/api/orders/clear-history', {
+    //   await axios.delete(`${url}/api/orders/clear-history`, {
     //     headers: { 'Authorization': `Bearer ${token}` }
     //   });
     // } catch (error) {
@@ -111,12 +113,12 @@ const Profile = () => {
     const formData = new FormData();
     formData.append('profilePhoto', file);
     try {
-      const response = await axios.post('http://localhost:3000/api/users/upload-photo', formData, {
+      const response = await axios.post(`${url}/api/users/upload-photo`, formData, {
         headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
       });
       const updatedUser = { ...user, profilePhoto: response.data.photoUrl };
       setUser(updatedUser);
-      setPhotoPreview(`http://localhost:3000${response.data.photoUrl}`);
+      setPhotoPreview(`${url}${response.data.photoUrl}`);
       alert('Photo updated!');
     } catch (error) {
       alert('Upload failed');

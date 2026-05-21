@@ -4,6 +4,8 @@ import { useCart } from '../context/CartContext';
 import ProductCard from '../components/ProductCard';
 import axios from 'axios';
 
+const url = 'http://localhost:3000';
+
 const Marketplace = () => {
   const { user } = useAuth();
   const { addToCart } = useCart();
@@ -40,7 +42,7 @@ const Marketplace = () => {
   const loadProducts = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:3000/api/products');
+      const response = await axios.get(`${url}/api/products`);
       setProducts(response.data);
     } catch (error) {
       console.error('Error loading products:', error);

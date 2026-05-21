@@ -6,6 +6,8 @@ import ProductCard from '../components/ProductCard';
 import { PlusIcon, PencilIcon, TrashIcon, CheckIcon, XMarkIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
 import axios from 'axios';
 
+const url = 'http://localhost:3000';
+
 const FarmerDashboard = () => {
   const { user, token } = useAuth();
   const [products, setProducts] = useState([]);
@@ -60,7 +62,7 @@ const FarmerDashboard = () => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:3000/api/products/farmer/${user._id}`, {
+      const response = await axios.get(`${url}/api/products/farmer/${user._id}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -95,7 +97,7 @@ const FarmerDashboard = () => {
 
     try {
       // Get pending orders
-      const pendingResponse = await axios.get(`http://localhost:3000/api/orders/farmer/${user._id}/pending`, {
+      const pendingResponse = await axios.get(`${url}/api/orders/farmer/${user._id}/pending`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -103,7 +105,7 @@ const FarmerDashboard = () => {
       });
 
       // Get all orders
-      const allResponse = await axios.get(`http://localhost:3000/api/orders/farmer/${user._id}`, {
+      const allResponse = await axios.get(`${url}/api/orders/farmer/${user._id}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -140,7 +142,7 @@ const FarmerDashboard = () => {
 
   const handleAddProduct = async (productData) => {
     try {
-      await axios.post('http://localhost:3000/api/products', productData, {
+      await axios.post(`${url}/api/products`, productData, {
         headers: {
           'Authorization': `Bearer ${token}`
           // Don't set Content-Type for FormData - let browser set it automatically
@@ -164,7 +166,7 @@ const FarmerDashboard = () => {
     if (!editingProduct) return;
 
     try {
-      await axios.put(`http://localhost:3000/api/products/${editingProduct._id || editingProduct.id}`, productData, {
+      await axios.put(`${url}/api/products/${editingProduct._id || editingProduct.id}`, productData, {
         headers: {
           'Authorization': `Bearer ${token}`
           // Don't set Content-Type for FormData - let browser set it automatically
@@ -184,7 +186,7 @@ const FarmerDashboard = () => {
     if (!window.confirm('Are you sure you want to delete this product?')) return;
 
     try {
-      await axios.delete(`http://localhost:3000/api/products/${productId}`, {
+      await axios.delete(`${url}/api/products/${productId}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -201,7 +203,7 @@ const FarmerDashboard = () => {
   const handleConfirmOrder = async (orderId) => {
     setConfirmingOrderId(orderId);
     try {
-      await axios.put(`http://localhost:3000/api/orders/${orderId}/confirm`, {}, {
+      await axios.put(`${url}/api/orders/${orderId}/confirm`, {}, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -229,7 +231,7 @@ const FarmerDashboard = () => {
     }
 
     try {
-      await axios.put(`http://localhost:3000/api/orders/${orderId}/cancel`, 
+      await axios.put(`${url}/api/orders/${orderId}/cancel`, 
         { notes: reason },
         {
           headers: {
