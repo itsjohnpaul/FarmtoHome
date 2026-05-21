@@ -5,7 +5,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { TrashIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
 import axios from 'axios';
 
-const url = 'http://localhost:3000';
+const url = 'https://farmtohome-14jo.onrender.com';
 
 const Cart = () => {
   const { user, token } = useAuth();
