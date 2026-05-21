@@ -4,7 +4,7 @@ import { useCart } from '../context/CartContext';
 import ProductCard from '../components/ProductCard';
 import axios from 'axios';
 
-const url = 'http://localhost:3000';
+const url = 'https://farmtohome-14jo.onrender.com';
 
 const Marketplace = () => {
   const { user } = useAuth();
