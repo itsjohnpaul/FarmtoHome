@@ -14,7 +14,7 @@ import {
 } from '@heroicons/react/24/outline';
 import axios from 'axios';
 
-const url = 'http://localhost:3000';
+const url = 'https://farmtohome-14jo.onrender.com';
 
 const Profile = () => {
   const { user, token, setUser, logout } = useAuth();
