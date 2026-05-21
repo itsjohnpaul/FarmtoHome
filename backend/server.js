@@ -4,27 +4,37 @@ const cors = require("cors");
 const path = require("path");
 
 const app = express();
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Note: Static uploads won't persist on Vercel's temporary file system.
-// Consider using Cloudinary or AWS S3 for images later.
+// Static folder for uploads
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Use an Environment Variable for your Mongo URI!
-const mongoURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/farm2home";
+// MongoDB Connection
+const mongoURI =
+  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/farm2home";
 
-mongoose.connect(mongoURI)
+mongoose
+  .connect(mongoURI)
   .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log("Mongo Error:", err));
+  .catch((err) => console.log("Mongo Error:", err));
 
+// Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/products", require("./routes/products"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/orders", require("./routes/orders"));
 
-// Add a default route to test if the server is alive
-app.get("/", (req, res) => res.send("Farm2Home API is running"));
+// Default Route
+app.get("/", (req, res) => {
+  res.send("Farm2Home API is running 🚀");
+});
 
-// CRITICAL FOR VERCEL:
-module.exports = app;
+// Start Server
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
